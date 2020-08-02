@@ -48,39 +48,39 @@ output "subnet_private_ids" {
   value = module.network_aws.subnet_private_ids
 }
 
-output "bastion_security_group" {
-  value = module.network_aws.bastion_security_group
-}
+# output "bastion_security_group" {
+#   value = module.network_aws.bastion_security_group
+# }
 
-output "bastion_ips_public" {
-  value = module.network_aws.bastion_ips_public
-}
+# output "bastion_ips_public" {
+#   value = module.network_aws.bastion_ips_public
+# }
 
-output "bastion_username" {
-  value = module.network_aws.bastion_username
-}
+# output "bastion_username" {
+#   value = module.network_aws.bastion_username
+# }
 
-output "private_key_name" {
-  value = module.ssh_keypair_aws_override.private_key_name
-}
+# output "private_key_name" {
+#   value = module.ssh_keypair_aws_override.private_key_name
+# }
 
-output "private_key_filename" {
-  value = module.ssh_keypair_aws_override.private_key_filename
-}
+# output "private_key_filename" {
+#   value = module.ssh_keypair_aws_override.private_key_filename
+# }
 
-output "private_key_pem" {
-  value = module.ssh_keypair_aws_override.private_key_pem
-}
+# output "private_key_pem" {
+#   value = module.ssh_keypair_aws_override.private_key_pem
+# }
 
-output "public_key_pem" {
-  value = module.ssh_keypair_aws_override.public_key_pem
-}
+# output "public_key_pem" {
+#   value = module.ssh_keypair_aws_override.public_key_pem
+# }
 
-output "public_key_openssh" {
-  value = module.ssh_keypair_aws_override.public_key_openssh
-}
+# output "public_key_openssh" {
+#   value = module.ssh_keypair_aws_override.public_key_openssh
+# }
 
-output "ssh_key_name" {
-  value = module.network_aws.ssh_key_name
-}
+# output "ssh_key_name" {
+#   value = module.network_aws.ssh_key_name
+# }
 
