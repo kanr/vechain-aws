@@ -84,7 +84,8 @@ resource "aws_instance" "bastion" {
   user_data            = data.template_file.bastion_user_data
   subnet_id            = module.network_aws.subnet_private_ids
   vpc_security_group_ids = [
-    module.network_aws.bastion_security_group
+    for each in module.network_aws.bastion_security_group:
+    each.id
   ]
   tags = var.tags
 }

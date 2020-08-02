@@ -50,7 +50,7 @@ output "subnet_private_ids" {
 }
 
 output "bastion_security_group" {
-  value = aws_security_group.bastion.id[1]
+  value = aws_security_group.bastion.id[count.index]
 }
 
 # output "bastion_ips_public" {
