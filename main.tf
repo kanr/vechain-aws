@@ -79,13 +79,12 @@ resource "aws_instance" "bastion" {
   # count = "${var.create && var.bastion_count != -1 ? var.bastion_count : var.create ? length(var.vpc_cidrs_public) : 0}"
   # iam_instance_profile = "${var.instance_profile != "" ? var.instance_profile : module.consul_auto_join_instance_role.instance_profile_id}"
   ami                  = "ami-0c69b501ce21f7203"
-  instance_type        = "${var.instance_type}"
+  instance_type        = var.instance_type
   key_name             = "desktop"
   user_data            = data.template_file.bastion_user_data
-  subnet_id            = "${element(aws_subnet.public.*.id, count.index)}"
+  subnet_id            = module.aws_network.aws_subnet.public.id
   vpc_security_group_ids = [
-    # "${module.bastion_consul_client_sg.consul_client_sg_id}",
-    "${element(concat(aws_security_group.bastion.*.id, list("")), 0)}", # TODO: Workaround for issue #11210
+    module.aws_network.aws_security_group.bastion.id
   ]
-  tags = "${merge(var.tags, map("Name", format("%s-bastion-%d", var.name, count.index + 1), "Consul-Auto-Join", var.name))}"
+  tags = var.tags
 }
