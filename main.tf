@@ -48,7 +48,7 @@ EOF
 module "network_aws" {
   # source = "github.com/hashicorp-modules/network-aws"
   source = "./modules/network/"
-
+  region = var.region
   create            = var.create
   name              = var.name
   create_vpc        = var.create_vpc
