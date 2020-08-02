@@ -70,8 +70,8 @@ module "network_aws" {
   instance_type = var.instance_type
   user_data     = data.template_file.bastion_user_data.rendered # Custom user_data
 
-  ssh_key_name      = "${module.ssh_keypair_aws_override.name}"
-  ssh_key_override  = "true"
+  # ssh_key_name      = "${module.ssh_keypair_aws_override.name}"
+  # ssh_key_override  = "true"
   tags = var.tags
 }
 

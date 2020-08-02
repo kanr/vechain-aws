@@ -100,29 +100,29 @@ variable "user_data" {
   default     = ""
 }
 
-variable "ssh_key_name" {
-  description = "AWS key name you will use to access the Bastion host instance(s), defaults to generating an SSH key for you."
-  default     = ""
-}
+# variable "ssh_key_name" {
+#   description = "AWS key name you will use to access the Bastion host instance(s), defaults to generating an SSH key for you."
+#   default     = ""
+# }
 
-variable "private_key_file" {
-  description = "Private key filename for AWS key passed in, defaults to empty."
-  default     = ""
-}
+# variable "private_key_file" {
+#   description = "Private key filename for AWS key passed in, defaults to empty."
+#   default     = ""
+# }
 
-variable "ssh_key_override" {
-  description = "Override the default SSH key and pass in your own, defaults to false."
-  default     = false
-}
+# variable "ssh_key_override" {
+#   description = "Override the default SSH key and pass in your own, defaults to false."
+#   default     = false
+# }
 
-variable "users" {
-  description = "Map of SSH users."
+# variable "users" {
+#   description = "Map of SSH users."
 
-  default = {
-    RHEL   = "ec2-user"
-    Ubuntu = "ubuntu"
-  }
-}
+#   default = {
+#     RHEL   = "ec2-user"
+#     Ubuntu = "ubuntu"
+#   }
+# }
 
 variable "tags" {
   description = "Optional map of tags to set on resources, defaults to empty map."
