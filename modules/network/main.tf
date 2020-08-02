@@ -222,7 +222,7 @@ resource "aws_security_group" "bastion" {
 resource "aws_security_group_rule" "ssh" {
   count = var.create && var.bastion_count > 0 ? 1 : 0
 
-  security_group_id = aws_security_group.bastion[0].id
+  security_group_id = aws_security_group.bastion.id
   type              = "ingress"
   protocol          = "tcp"
   from_port         = 22
@@ -233,7 +233,7 @@ resource "aws_security_group_rule" "ssh" {
 resource "aws_security_group_rule" "egress_public" {
   count = var.create && var.bastion_count > 0 ? 1 : 0
 
-  security_group_id = aws_security_group.bastion[0].id
+  security_group_id = aws_security_group.bastion.id
   type              = "egress"
   protocol          = "-1"
   from_port         = 0
