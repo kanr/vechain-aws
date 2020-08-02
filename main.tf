@@ -82,10 +82,10 @@ resource "aws_instance" "bastion" {
   instance_type        = var.instance_type
   key_name             = "desktop"
   user_data            = data.template_file.bastion_user_data
-  subnet_id            = module.network_aws.subnet_private_ids
-  vpc_security_group_ids = [
-    for each in module.network_aws.bastion_security_group:
-    each.id
-  ]
+  subnet_id            = module.network_aws.subnet_private_ids.id
+  # vpc_security_group_ids = [
+  #   for each in module.network_aws.bastion_security_group:
+  #   each.id
+  # ]
   tags = var.tags
 }
