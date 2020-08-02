@@ -1,36 +1,36 @@
-output "zREADME" {
-  value = <<README
-Your "${var.name}" network infrastructure has been successfully provisioned!
+# output "zREADME" {
+#   value = <<README
+# Your "${var.name}" network infrastructure has been successfully provisioned!
 
-A private RSA key has been generated and downloaded locally. The file permissions have been changed to 0600 so the key can be used immediately for SSH or scp.
+# A private RSA key has been generated and downloaded locally. The file permissions have been changed to 0600 so the key can be used immediately for SSH or scp.
 
-Run the below command to add this private key to the list maintained by ssh-agent so you're not prompted for it when using SSH or scp to connect to hosts with your public key.
+# Run the below command to add this private key to the list maintained by ssh-agent so you're not prompted for it when using SSH or scp to connect to hosts with your public key.
 
-  ${format(
-  "ssh-add %s",
-  module.ssh_keypair_aws_override.private_key_filename,
-  )}
+#   ${format(
+#   "ssh-add %s",
+#   module.ssh_keypair_aws_override.private_key_filename,
+#   )}
 
-The public part of the key loaded into the agent ("public_key_openssh" output) has been placed on the target system in ~/.ssh/authorized_keys.
+# The public part of the key loaded into the agent ("public_key_openssh" output) has been placed on the target system in ~/.ssh/authorized_keys.
 
-Use the below command(s) to SSH into a Bastion host using this private key.
+# Use the below command(s) to SSH into a Bastion host using this private key.
 
-  ${join(
-  "\n  ",
-  formatlist(
-    "ssh -A -i %s %s@%s",
-    module.ssh_keypair_aws_override.private_key_filename,
-    module.network_aws.bastion_username,
-    module.network_aws.bastion_ips_public,
-  ),
-)}
+#   ${join(
+#   "\n  ",
+#   formatlist(
+#     "ssh -A -i %s %s@%s",
+#     module.ssh_keypair_aws_override.private_key_filename,
+#     module.network_aws.bastion_username,
+#     module.network_aws.bastion_ips_public,
+#   ),
+# )}
 
-To force the generation of a new key, the private key instance can be "tainted" using the below command.
+# To force the generation of a new key, the private key instance can be "tainted" using the below command.
 
-  terraform taint -module=ssh_keypair_aws_override.tls_private_key tls_private_key.key
-README
+#   terraform taint -module=ssh_keypair_aws_override.tls_private_key tls_private_key.key
+# README
 
-}
+# }
 
 output "vpc_cidr" {
   value = module.network_aws.vpc_cidr
