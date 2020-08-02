@@ -47,8 +47,8 @@ EOF
 
 module "network_aws" {
   # source = "github.com/hashicorp-modules/network-aws"
-  source = "./modules/network/"
-  region = var.region
+  source            = "./modules/network/"
+  # region            = var.region
   create            = var.create
   name              = var.name
   create_vpc        = var.create_vpc
@@ -59,12 +59,12 @@ module "network_aws" {
   vpc_cidrs_private = var.vpc_cidrs_private
   release_version   = var.release_version
 
-  consul_version    = "${var.consul_version}"
-  vault_version     = "${var.vault_version}"
-  nomad_version     = "${var.nomad_version}"
-  os                = "${var.os}"
-  os_version        = "${var.os_version}"
-  bastion_count = var.bastion_count
+  consul_version = "${var.consul_version}"
+  vault_version  = "${var.vault_version}"
+  nomad_version  = "${var.nomad_version}"
+  os             = "${var.os}"
+  os_version     = "${var.os_version}"
+  bastion_count  = var.bastion_count
 
   # instance_profile  = "${module.consul_auto_join_instance_role_override.instance_profile_id}" # Override instance_profile
   instance_type = var.instance_type
