@@ -59,19 +59,19 @@ module "network_aws" {
   vpc_cidrs_private = var.vpc_cidrs_private
   release_version   = var.release_version
 
-  # consul_version    = "${var.consul_version}"
-  # vault_version     = "${var.vault_version}"
-  # nomad_version     = "${var.nomad_version}"
-  # os                = "${var.os}"
-  # os_version        = "${var.os_version}"
+  consul_version    = "${var.consul_version}"
+  vault_version     = "${var.vault_version}"
+  nomad_version     = "${var.nomad_version}"
+  os                = "${var.os}"
+  os_version        = "${var.os_version}"
   bastion_count = var.bastion_count
 
-  # instance_profile  = "${module.consul_auto_join_instance_role_override.instance_profile_id}" # Override instance_profile
+  instance_profile  = "${module.consul_auto_join_instance_role_override.instance_profile_id}" # Override instance_profile
   instance_type = var.instance_type
   user_data     = data.template_file.bastion_user_data.rendered # Custom user_data
 
-  # ssh_key_name      = "${module.ssh_keypair_aws_override.name}"
-  # ssh_key_override  = "true"
+  ssh_key_name      = "${module.ssh_keypair_aws_override.name}"
+  ssh_key_override  = "true"
   tags = var.tags
 }
 
