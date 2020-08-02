@@ -81,7 +81,11 @@ resource "aws_instance" "bastion" {
   ami                  = "ami-0c69b501ce21f7203"
   instance_type        = "${var.instance_type}"
   key_name             = "desktop"
+<<<<<<< HEAD
   user_data            = data.template_file.bastion_user_data
+=======
+  user_data            = data.bastion_user_data
+>>>>>>> 1b22e82451f991e19e178894a0362940a56c34e7
   subnet_id            = "${element(aws_subnet.public.*.id, count.index)}"
   vpc_security_group_ids = [
     # "${module.bastion_consul_client_sg.consul_client_sg_id}",
