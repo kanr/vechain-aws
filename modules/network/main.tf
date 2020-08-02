@@ -206,8 +206,8 @@ data "template_file" "bastion_init" {
 # }
 
 resource "aws_security_group" "bastion" {
-  count       = var.create && var.bastion_count > 0 ? 1 : 0
-  name_prefix = "${var.name}-bastion-"
+  # count       = var.create && var.bastion_count > 0 ? 1 : 0
+  name_prefix = "${var.name}-bastion"
   description = "Security Group for ${var.name} Bastion hosts"
   vpc_id      = var.create_vpc ? element(concat(aws_vpc.main.*.id, [""]), 0) : var.vpc_id # TODO: Workaround for issue #11210
 
