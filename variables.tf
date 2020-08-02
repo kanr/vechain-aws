@@ -52,3 +52,7 @@ variable "tags" {
   type = map(string)
 }
 
+variable "region" {
+  description = "aws region"
+  default = "us-east-1"
+}
