@@ -49,9 +49,9 @@ output "subnet_private_ids" {
   value = [aws_subnet.private.*.id]
 }
 
-# output "bastion_security_group" {
-#   value = element(concat(aws_security_group.bastion.*.id, [""]), 0)
-# }
+output "bastion_security_group" {
+  value = aws_security_group.bastion.id
+}
 
 # output "bastion_ips_public" {
 #   value = [aws_instance.bastion.*.public_ip]

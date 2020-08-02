@@ -48,9 +48,9 @@ output "subnet_private_ids" {
   value = module.network_aws.subnet_private_ids
 }
 
-# output "bastion_security_group" {
-#   value = module.network_aws.bastion_security_group
-# }
+output "bastion_security_group" {
+  value = module.network_aws.bastion_security_group
+}
 
 # output "bastion_ips_public" {
 #   value = module.network_aws.bastion_ips_public
