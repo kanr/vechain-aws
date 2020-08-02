@@ -41,7 +41,7 @@ EOF
 
 module "network_aws" {
   # source = "github.com/hashicorp-modules/network-aws"
-  source = "/modules/network"
+  source = "modules/network/"
 
   create            = "${var.create}"
   name              = "${var.name}"
