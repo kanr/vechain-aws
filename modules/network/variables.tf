@@ -25,8 +25,8 @@ variable "vpc_cidr" {
 
 variable "vpc_cidrs_public" {
   description = "VPC CIDR blocks for public subnets, defaults to \"10.139.1.0/24\", \"10.139.2.0/24\", and \"10.139.3.0/24\"."
-  type        = "list"
-  default     = ["10.139.1.0/24", "10.139.2.0/24", "10.139.3.0/24",]
+  type        = list(string)
+  default     = ["10.139.1.0/24", "10.139.2.0/24", "10.139.3.0/24"]
 }
 
 variable "nat_count" {
@@ -36,8 +36,8 @@ variable "nat_count" {
 
 variable "vpc_cidrs_private" {
   description = "VPC CIDR blocks for private subnets, defaults to \"10.139.11.0/24\", \"10.139.12.0/24\", and \"10.139.13.0/24\"."
-  type        = "list"
-  default     = ["10.139.11.0/24", "10.139.12.0/24", "10.139.13.0/24",]
+  type        = list(string)
+  default     = ["10.139.11.0/24", "10.139.12.0/24", "10.139.13.0/24"]
 }
 
 variable "ami_owner" {
@@ -126,6 +126,7 @@ variable "users" {
 
 variable "tags" {
   description = "Optional map of tags to set on resources, defaults to empty map."
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
+
