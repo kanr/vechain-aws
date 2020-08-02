@@ -1,5 +1,5 @@
 create            = true
-name              = "network-aws-advanced"
+name              = "vechain"
 create_vpc        = false
 rsa_bits          = "3072"
 vpc_cidr          = "172.19.0.0/16"
@@ -14,5 +14,5 @@ os                = "Ubuntu" # OS (e.g. RHEL, Ubuntu)
 os_version        = "16.04"  # OS Version (e.g. 7.3 for RHEL, 16.04 for Ubuntu)
 bastion_count     = "1"      # Number of bastion hosts to provision across public subnets, defaults to public subnet count.
 instance_type     = "t2.small"
-tags              = { "foo" = "bar", "fizz" = "buzz" }
+tags              = { "environment" = "dev" }
 region            = "us-east-1"
