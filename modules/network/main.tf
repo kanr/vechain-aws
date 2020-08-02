@@ -139,12 +139,12 @@ resource "aws_route_table_association" "private" {
   route_table_id = element(aws_route_table.private_subnet.*.id, count.index)
 }
 
-module "consul_auto_join_instance_role" {
-  source = "github.com/hashicorp-modules/consul-auto-join-instance-role-aws"
+# module "consul_auto_join_instance_role" {
+#   source = "github.com/hashicorp-modules/consul-auto-join-instance-role-aws"
 
-  create = var.create && var.bastion_count > 0 ? 1 : 0
-  name   = var.name
-}
+#   create = var.create && var.bastion_count > 0 ? 1 : 0
+#   name   = var.name
+# }
 
 data "aws_ami" "hashistack" {
   count       = var.create && var.image_id == "" && var.bastion_count > 0 ? 1 : 0
@@ -163,28 +163,28 @@ data "aws_ami" "hashistack" {
   }
 }
 
-module "ssh_keypair_aws" {
-  source = "github.com/hashicorp-modules/ssh-keypair-aws"
+# module "ssh_keypair_aws" {
+#   source = "github.com/hashicorp-modules/ssh-keypair-aws"
 
-  # This doesn't set the "key_name" attribute on aws_instance.bastion when uncommented,
-  # there always seems to be 1.) a dirty plan that fails to set the value on apply
-  # or 2.) the plan fails because of a count interpolation error in the tls-private-key
-  # module. Commenting this out just creates an ssh_keypair regardless if one is passed in,
-  # so not too big of a deal, worst case scenario is you have an un-used keypair.
+#   # This doesn't set the "key_name" attribute on aws_instance.bastion when uncommented,
+#   # there always seems to be 1.) a dirty plan that fails to set the value on apply
+#   # or 2.) the plan fails because of a count interpolation error in the tls-private-key
+#   # module. Commenting this out just creates an ssh_keypair regardless if one is passed in,
+#   # so not too big of a deal, worst case scenario is you have an un-used keypair.
 
-  # EDIT: 1: Was resolved using a concat on module.ssh_keypair_aws.$attribute,
-  # 2: When using the "advanced" example and the below argument "create" is uncommented,
-  # the variable ${var.ssh_key_name} is computed, throwing the error
-  # "value of 'count' cannot be computed". As a workaround, we're passing in a static
-  # variable ${var.ssh_key_override} until the below issue is fixed.
-  # https://github.com/hashicorp/terraform/issues/12570#issuecomment-310236691
-  # https://github.com/hashicorp/terraform/issues/4149
-  # https://github.com/hashicorp/terraform/issues/10857
-  # https://github.com/hashicorp/terraform/issues/13980
-  # create = "${var.create && var.ssh_key_name != "" && var.bastion_count > 0 ? 1 : 0}" # TODO: Uncomment once issue #4149 is resolved
-  create = var.create && false == var.ssh_key_override && var.bastion_count > 0 ? 1 : 0 # TODO: Remove once issue #4149 is resolved
-  name   = var.name
-}
+#   # EDIT: 1: Was resolved using a concat on module.ssh_keypair_aws.$attribute,
+#   # 2: When using the "advanced" example and the below argument "create" is uncommented,
+#   # the variable ${var.ssh_key_name} is computed, throwing the error
+#   # "value of 'count' cannot be computed". As a workaround, we're passing in a static
+#   # variable ${var.ssh_key_override} until the below issue is fixed.
+#   # https://github.com/hashicorp/terraform/issues/12570#issuecomment-310236691
+#   # https://github.com/hashicorp/terraform/issues/4149
+#   # https://github.com/hashicorp/terraform/issues/10857
+#   # https://github.com/hashicorp/terraform/issues/13980
+#   # create = "${var.create && var.ssh_key_name != "" && var.bastion_count > 0 ? 1 : 0}" # TODO: Uncomment once issue #4149 is resolved
+#   create = var.create && false == var.ssh_key_override && var.bastion_count > 0 ? 1 : 0 # TODO: Remove once issue #4149 is resolved
+#   name   = var.name
+# }
 
 data "template_file" "bastion_init" {
   count    = var.create && var.bastion_count != -1 ? var.bastion_count : var.create ? length(var.vpc_cidrs_public) : 0
@@ -196,14 +196,14 @@ data "template_file" "bastion_init" {
   }
 }
 
-module "bastion_consul_client_sg" {
-  source = "github.com/hashicorp-modules/consul-client-ports-aws"
+# module "bastion_consul_client_sg" {
+#   source = "github.com/hashicorp-modules/consul-client-ports-aws"
 
-  create      = var.create && var.bastion_count > 0 ? 1 : 0
-  name        = "${var.name}-bastion-consul-client"
-  vpc_id      = var.create_vpc ? element(concat(aws_vpc.main.*.id, [""]), 0) : var.vpc_id # TODO: Workaround for issue #11210
-  cidr_blocks = [var.vpc_cidr]
-}
+#   create      = var.create && var.bastion_count > 0 ? 1 : 0
+#   name        = "${var.name}-bastion-consul-client"
+#   vpc_id      = var.create_vpc ? element(concat(aws_vpc.main.*.id, [""]), 0) : var.vpc_id # TODO: Workaround for issue #11210
+#   cidr_blocks = [var.vpc_cidr]
+# }
 
 resource "aws_security_group" "bastion" {
   count       = var.create && var.bastion_count > 0 ? 1 : 0
